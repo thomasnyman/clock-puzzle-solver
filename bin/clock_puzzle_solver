@@ -37,6 +37,7 @@ to the puzzle.
 import sys
 
 def main():
+    "Parses command line arguments and attempts to solve puzzle by brute force."
     # Determine clock values from command line arguments
     values = [int(arg) for arg in sys.argv[1:]]
 
@@ -64,6 +65,9 @@ def solve_puzzle(values, i, chain=None):
     Returns:
         A list of positions representing a possible solution.
 
+    Raises:
+        IndexError: If i out of range.
+
     """
     if not chain:
         chain = []
@@ -85,7 +89,8 @@ def solve_puzzle(values, i, chain=None):
     solution = solve_puzzle(values[:], position1, chain[:])
     
     # If the clockwise move does not lead to a solution, move counter-clockwise
-    return solution[:] if len(solution) == len(values) else solve_puzzle(values, position2, chain)
+    return (solution[:] if len(solution) == len(values)
+            else solve_puzzle(values, position2, chain))
 
 if __name__ == '__main__':
     main()
