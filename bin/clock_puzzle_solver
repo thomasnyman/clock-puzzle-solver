@@ -38,6 +38,9 @@ import sys
 
 def main():
     "Parses command line arguments and attempts to solve puzzle by brute force."
+    if len(sys.argv) == 1:
+        sys.exit("%s: error: missing argument" % sys.argv[0])
+
     # Determine clock values from command line arguments
     values = [int(arg) for arg in sys.argv[1:]]
 
